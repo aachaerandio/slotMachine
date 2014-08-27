@@ -9,8 +9,6 @@ import java.util.Date;
  * Created by Araceli on 27/08/2014.
  */
 public class State {
-
-
     public enum SlotIcon {
         CHERRY(R.drawable.slot_icon_01, R.drawable.list_icon_01), //0
         LEMON(R.drawable.slot_icon_02, R.drawable.list_icon_02), //1
@@ -23,6 +21,16 @@ public class State {
         private SlotIcon(int slotId, int listId) {
             this.slotId = slotId;
             this.listId = listId;
+        }
+
+        public SlotIcon getNext() {
+            return SlotIcon.values()[(this.ordinal() + 1)%SlotIcon.values().length];
+        }
+
+        public SlotIcon getPrevious() {
+            return (this.ordinal() > 0)
+                    ? SlotIcon.values()[this.ordinal() - 1]
+                    : SlotIcon.values()[SlotIcon.values().length-1];
         }
         };
 

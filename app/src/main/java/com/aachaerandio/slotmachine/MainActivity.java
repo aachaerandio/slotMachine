@@ -1,7 +1,7 @@
 package com.aachaerandio.slotmachine;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +28,9 @@ public class MainActivity extends ActionBarActivity {
     Random random = new Random();
     Animation animation;
     SlotService slotService;
-    protected SpinnerView mSpinnerView;
+    protected SpinnerView mSpinnerView1;
+    protected SpinnerView mSpinnerView2;
+    protected SpinnerView mSpinnerView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,10 @@ public class MainActivity extends ActionBarActivity {
         Button start = (Button)findViewById(R.id.start_button);
         animation = AnimationUtils.loadAnimation(this, R.anim.scale);
         slotService = new SlotService(this);
+
+        mSpinnerView1 = (SpinnerView) findViewById(R.id.spinnerView);
+        mSpinnerView2 = (SpinnerView) findViewById(R.id.spinnerView2);
+        mSpinnerView3 = (SpinnerView) findViewById(R.id.spinnerView3);
 
 
         start.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +70,8 @@ public class MainActivity extends ActionBarActivity {
                 startGame();
 
 
-                Intent intent = new Intent(MainActivity.this, ListStateActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, ListStateActivity.class);
+//                startActivity(intent);
 
 
 
@@ -74,9 +80,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void startGame(){
+        Handler handler = new Handler();
 
-
-
+        handler.post(mSpinnerView1);
 
     }
 

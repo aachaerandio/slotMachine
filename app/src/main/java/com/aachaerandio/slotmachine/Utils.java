@@ -20,4 +20,21 @@ public class Utils {
 
         return results;
     }
+
+    public static Integer getRandomInt3(){
+        Random random = new Random();
+        Integer result = 0;
+        Integer i = random.nextInt(100);
+        if (i > 0 && i < 33){
+            result = 0;
+        }
+        else if (i > 33 && i < 66){
+            result = 1;
+        }
+        else if (i > 66){
+            result = 2;
+        }
+
+        return result;
+    }
 }
