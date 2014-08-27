@@ -15,7 +15,7 @@ public class Utils {
         Random random = new Random();
 
         for(int i=0; i<3; i++) {
-            results[i] = SlotIcon.values()[random.nextInt(2)];
+            results[i] = SlotIcon.values()[random.nextInt(3)];
         }
 
         return results;

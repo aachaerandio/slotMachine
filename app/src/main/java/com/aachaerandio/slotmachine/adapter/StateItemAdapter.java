@@ -51,10 +51,10 @@ public class StateItemAdapter extends ArrayAdapter<State> {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.id.setText(String.valueOf(item.getId()));
-        holder.iconA.setImageResource(item.getIconA().id);
-        holder.iconB.setImageResource(item.getIconB().id);
-        holder.iconC.setImageResource(item.getIconC().id);
+        //holder.id.setText(String.valueOf(item.getId()));
+        holder.iconA.setImageResource(item.getIconA().listId);
+        holder.iconB.setImageResource(item.getIconB().listId);
+        holder.iconC.setImageResource(item.getIconC().listId);
 
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy");
         //holder.date.setText(df.format(item.getCreated()));

@@ -65,8 +65,11 @@ public class ListStateActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_list_state, container, false);
-            ListView list = (ListView)rootView.findViewById(R.id.list);
+            ListView list = (ListView)rootView.findViewById(android.R.id.list);
 
+            slotService = new SlotService(getActivity());
+
+            readData();
             list.setAdapter(mAdapter);
             return rootView;
         }

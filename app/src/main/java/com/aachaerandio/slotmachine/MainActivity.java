@@ -1,5 +1,6 @@
 package com.aachaerandio.slotmachine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -56,6 +57,8 @@ public class MainActivity extends ActionBarActivity {
                 State.SlotIcon[] slotIcons = Utils.generateRandomResults();
                 slotService.insert(new State(slotIcons));
 
+                Intent intent = new Intent(MainActivity.this, ListStateActivity.class);
+                startActivity(intent);
 
             }
         });

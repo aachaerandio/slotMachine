@@ -2,6 +2,7 @@ package com.aachaerandio.slotmachine.data;
 
 import com.aachaerandio.slotmachine.R;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -11,15 +12,17 @@ public class State {
 
 
     public enum SlotIcon {
-        CHERRY(R.drawable.slot_icon_01), //0
-        LEMON(R.drawable.slot_icon_02), //1
-        PEAR(R.drawable.slot_icon_03); //2
+        CHERRY(R.drawable.slot_icon_01, R.drawable.list_icon_01), //0
+        LEMON(R.drawable.slot_icon_02, R.drawable.list_icon_02), //1
+        PEAR(R.drawable.slot_icon_03, R.drawable.list_icon_03); //2
 
-        public int id;
+        public int slotId;
 
+        public int listId;
 
-        private SlotIcon(int id) {
-            this.id = id;
+        private SlotIcon(int slotId, int listId) {
+            this.slotId = slotId;
+            this.listId = listId;
         }
         };
 
@@ -29,7 +32,10 @@ public class State {
     private SlotIcon iconC;
     private Date created;
 
-    public State(SlotIcon... icons) {
+    public State() {
+    }
+
+    public State(SlotIcon[] icons) {
         iconA = icons[0];
         iconB = icons[1];
         iconC = icons[2];
@@ -73,5 +79,16 @@ public class State {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    @Override
+    public String toString() {
+        Calendar c = Calendar.getInstance();
+        String date = "";
+        if (created != null) {
+           c.setTime(created);
+           date = String.format("[%d:%d:%d]", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), c.get(Calendar.SECOND));
+        }
+        return String.format("%s %s %s %s", date, iconA.name(), iconB.name(), iconC.name());
     }
 }
