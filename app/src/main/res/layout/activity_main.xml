@@ -23,29 +23,13 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_gravity="center_horizontal">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:id="@+id/imageView1"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/slot_icon_01"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:id="@+id/imageView2"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/slot_icon_01"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:id="@+id/imageView3"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/slot_icon_01"/>
-            </LinearLayout>
+
+        <com.aachaerandio.slotmachine.views.SpinnerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerView">
+
+        </com.aachaerandio.slotmachine.views.SpinnerView>
 
         <LinearLayout
             android:orientation="vertical"
@@ -97,17 +81,19 @@
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="Start"
+        android:text="@string/start"
         android:id="@+id/start_button"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_horizontal"
+        android:background="#B266FF"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="Records"
+        android:text="@string/Records"
         android:id="@+id/list_button"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"/>
 
 </LinearLayout>

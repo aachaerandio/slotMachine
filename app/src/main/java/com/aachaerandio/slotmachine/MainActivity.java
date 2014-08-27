@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.aachaerandio.slotmachine.data.SlotService;
 import com.aachaerandio.slotmachine.data.State;
+import com.aachaerandio.slotmachine.views.SpinnerView;
 
 import java.util.Random;
 
@@ -27,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
     Random random = new Random();
     Animation animation;
     SlotService slotService;
+    protected SpinnerView mSpinnerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends ActionBarActivity {
         Button start = (Button)findViewById(R.id.start_button);
         animation = AnimationUtils.loadAnimation(this, R.anim.scale);
         slotService = new SlotService(this);
+
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,11 +60,24 @@ public class MainActivity extends ActionBarActivity {
                 State.SlotIcon[] slotIcons = Utils.generateRandomResults();
                 slotService.insert(new State(slotIcons));
 
+
+                startGame();
+
+
                 Intent intent = new Intent(MainActivity.this, ListStateActivity.class);
                 startActivity(intent);
 
+
+
             }
         });
+    }
+
+    public void startGame(){
+
+
+
+
     }
 
 
