@@ -27,55 +27,22 @@
         <com.aachaerandio.slotmachine.views.SpinnerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerView">
-
+            android:id="@+id/spinnerView"
+            android:layout_marginRight="10dp">
         </com.aachaerandio.slotmachine.views.SpinnerView>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="100dp"
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:id="@+id/imageView4"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/slot_icon_01"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:id="@+id/imageView5"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/slot_icon_01"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:id="@+id/imageView6"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/slot_icon_01"/>
-        </LinearLayout>
+        <com.aachaerandio.slotmachine.views.SpinnerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerView2"
+            android:layout_marginRight="10dp">
+        </com.aachaerandio.slotmachine.views.SpinnerView>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="100dp"
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:id="@+id/imageView7"
-                android:layout_gravity="center_vertical"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:id="@+id/imageView8"
-                android:layout_gravity="center_vertical" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:id="@+id/imageView9"
-                android:layout_gravity="center_vertical" />
-        </LinearLayout>
+        <com.aachaerandio.slotmachine.views.SpinnerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerView3">
+        </com.aachaerandio.slotmachine.views.SpinnerView>
 
     </LinearLayout>
 
