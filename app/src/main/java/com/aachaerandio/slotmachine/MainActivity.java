@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.aachaerandio.slotmachine.data.SlotService;
 import com.aachaerandio.slotmachine.data.State;
@@ -88,6 +89,11 @@ public class MainActivity extends ActionBarActivity {
 
         State.SlotIcon[] slotIcons = getSelectedCombination();
         slotService.insert(new State(slotIcons));
+
+        if ((slotIcons[0].slotId == slotIcons[1].slotId) && (slotIcons[1].slotId == slotIcons[2].slotId)) {
+            Toast.makeText(this, "Claim!", Toast.LENGTH_LONG).show();
+            new ClaimDialogFragment().show(getSupportFragmentManager(), "Prize");
+        }
 
     }
 
