@@ -23,13 +23,11 @@ public class SpinnerView extends LinearLayout implements Runnable{
     ImageView lowerImage;
     State.SlotIcon selected;
 
-    public static final int SPEED = 50;
+    public int speed;
     public int counter;
 
     Handler mHandler = new Handler();
     OnSpinnerEndListener listener;
-
-//    View mView;
 
     public SpinnerView(Context context) {
         super(context);
@@ -65,6 +63,7 @@ public class SpinnerView extends LinearLayout implements Runnable{
 
     public void startSpinning(int delay, int counter){
         this.counter = counter;
+        speed = 50;
         mHandler.postDelayed(this, delay);
 
     }
@@ -75,14 +74,20 @@ public class SpinnerView extends LinearLayout implements Runnable{
         spin();
 
         if(--counter > 0) {
-            mHandler.postDelayed(this, 100-SPEED);
+            if(counter < 20) {
+                speed -=2;
+            }
+            mHandler.postDelayed(this, 100-speed);
         }
-        else{
+        else if(listener != null){
             listener.checkAndSave();
         }
 
     }
 
+    /**
+     *  Rotates once the spinner
+     */
     private void spin() {
         selected = selected.getPrevious();
 

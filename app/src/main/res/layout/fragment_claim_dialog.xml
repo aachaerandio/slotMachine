@@ -48,14 +48,18 @@
             android:id="@+id/dialog_image"
             android:layout_marginTop="50dp"/>
 
-        <ImageView
+        <Button
             android:layout_width="match_parent"
+            android:id="@+id/button_claim"
             android:layout_height="64dp"
             android:scaleType="center"
             android:background="@color/blue"
             android:contentDescription="@string/app_name"
             android:layout_marginTop="100dp"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"
+            android:text="@string/button_text"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
 
     </LinearLayout>
 

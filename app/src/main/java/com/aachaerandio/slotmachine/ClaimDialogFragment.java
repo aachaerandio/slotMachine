@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,21 +27,21 @@ public class ClaimDialogFragment extends DialogFragment {
         ImageView image = (ImageView)view.findViewById(R.id.dialog_image);
         TextView winnerText = (TextView)view.findViewById(R.id.winner_text);
         State.SlotIcon slotIcon = State.SlotIcon.values()[getArguments().getInt(MainActivity.WINNER_ICON)];
-        image.setImageResource(slotIcon.slotId);
+        image.setImageResource(slotIcon.prizeId);
         winnerText.setText(slotIcon.toString());
+
+        Button button = (Button)view.findViewById(R.id.button_claim);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
         builder.setView(view);
-        // Add action buttons
- /*               .setPositiveButton(R.string.signin, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        // sign in the user ...
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        LoginDialogFragment.this.getDialog().cancel();
-                    }
-                });*/
+
         return builder.create();
+
+
     }
 }

@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
 
 import com.aachaerandio.slotmachine.Listeners.OnSpinnerEndListener;
@@ -16,7 +15,6 @@ import com.aachaerandio.slotmachine.data.State;
 import com.aachaerandio.slotmachine.views.SpinnerView;
 
 import java.util.Random;
-
 
 
 public class MainActivity extends ActionBarActivity implements OnSpinnerEndListener{
@@ -29,7 +27,6 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
     };
 
     Random random = new Random();
-    Animation animation;
     SlotService slotService;
     protected SpinnerView mSpinnerView1;
     protected SpinnerView mSpinnerView2;
@@ -43,7 +40,6 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
         Button start = (Button)findViewById(R.id.start_button);
         Button history = (Button)findViewById(R.id.list_button);
 
-        //animation = AnimationUtils.loadAnimation(this, R.anim.scale);
         slotService = new SlotService(this);
 
         mSpinnerView1 = (SpinnerView) findViewById(R.id.spinnerView);
@@ -72,6 +68,10 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
         });
     }
 
+    /**
+     *  Each time the spinner starts it initialises the semaphore and
+     *  generates the number of iterations of each spinner
+     */
     public void startGame(){
         semaphore = 3;
 
@@ -87,6 +87,10 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
         mSpinnerView3.startSpinning(150, iteration3);
     }
 
+    /**
+     *  Return the winner combination
+     * @return State.SlotIcon[]
+     */
     public State.SlotIcon[] getSelectedCombination(){
         State.SlotIcon[] result = new State.SlotIcon[3];
 
@@ -116,6 +120,10 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Callback implementation invoked by the spinners when they finish.
+     * A semaphore is orchestrating the spinners processes.
+     */
     @Override
     public void checkAndSave() {
         if (--semaphore <= 0) {

@@ -2,4 +2,5 @@
 <resources>
     <color name="blue">#8629dbd0</color>
     <color name="pink">#ffff459d</color>
+    <color name="white">#FFFFFF</color>
 </resources>
