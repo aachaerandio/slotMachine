@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.aachaerandio.slotmachine.Listeners.OnSpinnerEndListener;
 import com.aachaerandio.slotmachine.Utils;
 import com.aachaerandio.slotmachine.data.State;
 
@@ -16,6 +17,7 @@ import com.aachaerandio.slotmachine.data.State;
  */
 public class SpinnerView extends LinearLayout implements Runnable{
 
+    private Context mContext;
     ImageView upperImage;
     ImageView selectedImage;
     ImageView lowerImage;
@@ -25,16 +27,19 @@ public class SpinnerView extends LinearLayout implements Runnable{
     public int counter;
 
     Handler mHandler = new Handler();
+    OnSpinnerEndListener listener;
 
 //    View mView;
 
     public SpinnerView(Context context) {
         super(context);
+        mContext = context;
         init();
     }
 
     public SpinnerView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
         init();
     }
 
@@ -72,6 +77,9 @@ public class SpinnerView extends LinearLayout implements Runnable{
         if(--counter > 0) {
             mHandler.postDelayed(this, 100-SPEED);
         }
+        else{
+            listener.checkAndSave();
+        }
 
     }
 
@@ -89,5 +97,10 @@ public class SpinnerView extends LinearLayout implements Runnable{
 
     public State.SlotIcon getSelected() {
         return selected;
+    }
+
+    public void setListener(OnSpinnerEndListener listener){
+        this.listener = listener;
+
     }
 }

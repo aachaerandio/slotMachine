@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
 
+import com.aachaerandio.slotmachine.Listeners.OnSpinnerEndListener;
 import com.aachaerandio.slotmachine.data.SlotService;
 import com.aachaerandio.slotmachine.data.State;
 import com.aachaerandio.slotmachine.views.SpinnerView;
@@ -17,7 +18,7 @@ import java.util.Random;
 
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements OnSpinnerEndListener{
 
     private int [] images = {
          R.drawable.slot_icon_01,
@@ -31,6 +32,7 @@ public class MainActivity extends ActionBarActivity {
     protected SpinnerView mSpinnerView1;
     protected SpinnerView mSpinnerView2;
     protected SpinnerView mSpinnerView3;
+    public int semaphore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,10 @@ public class MainActivity extends ActionBarActivity {
         mSpinnerView1 = (SpinnerView) findViewById(R.id.spinnerView);
         mSpinnerView2 = (SpinnerView) findViewById(R.id.spinnerView2);
         mSpinnerView3 = (SpinnerView) findViewById(R.id.spinnerView3);
+
+        mSpinnerView1.setListener(this);
+        mSpinnerView2.setListener(this);
+        mSpinnerView3.setListener(this);
 
         // Start button
         start.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +71,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void startGame(){
+        semaphore = 3;
 
         // Get ramdom number of iterations for every column
         int iteration1 = Utils.getRandomInt3() + 50;
@@ -97,13 +104,6 @@ public class MainActivity extends ActionBarActivity {
         mSpinnerView3.startSpinning(150, iteration3);
 
 
-        State.SlotIcon[] slotIcons = getSelectedCombination();
-        slotService.insert(new State(slotIcons));
-
-        if ((slotIcons[0].slotId == slotIcons[1].slotId) && (slotIcons[1].slotId == slotIcons[2].slotId)) {
-            new ClaimDialogFragment().show(getSupportFragmentManager(), "Prize");
-        }
-
     }
 
     public State.SlotIcon[] getSelectedCombination(){
@@ -134,4 +134,17 @@ public class MainActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void checkAndSave() {
+        if (--semaphore <= 0) {
+            State.SlotIcon[] slotIcons = getSelectedCombination();
+            slotService.insert(new State(slotIcons));
+
+            if ((slotIcons[0].slotId == slotIcons[1].slotId) && (slotIcons[1].slotId == slotIcons[2].slotId)) {
+                new ClaimDialogFragment().show(getSupportFragmentManager(), "Prize");
+            }
+        }
+    }
+
 }
