@@ -2,20 +2,19 @@ package com.aachaerandio.slotmachine;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.aachaerandio.slotmachine.data.SlotService;
 import com.aachaerandio.slotmachine.data.State;
 import com.aachaerandio.slotmachine.views.SpinnerView;
 
 import java.util.Random;
+
 
 
 public class MainActivity extends ActionBarActivity {
@@ -47,30 +46,15 @@ public class MainActivity extends ActionBarActivity {
         mSpinnerView2 = (SpinnerView) findViewById(R.id.spinnerView2);
         mSpinnerView3 = (SpinnerView) findViewById(R.id.spinnerView3);
 
-
+        // Start button
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                int randBuffer[] = new int [3];
-//                ImageView[] ivFruit = {
-//                        (ImageView)findViewById(R.id.imageView1),
-//                        (ImageView)findViewById(R.id.imageView2),
-//                        (ImageView)findViewById(R.id.imageView3)
-//                };
-//                for(int i=0;i<3;i++)
-//                {
-//                    randBuffer[i] = random.nextInt(images.length);
-//                    ivFruit[i].setImageResource(images[randBuffer[i]]);
-//                    ivFruit[i].startAnimation(animation);
-//                }
-
                 startGame();
-
             }
         });
 
-
+        // History button to show listView
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,17 +65,42 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void startGame(){
-        Handler handler = new Handler();
 
-        handler.post(mSpinnerView1);
-        handler.postDelayed(mSpinnerView2, 500);
-        handler.postDelayed(mSpinnerView3, 1000);
+        // Get ramdom number of iterations for every column
+        int iteration1 = Utils.getRandomInt3() + 50;
+        int iteration2 = Utils.getRandomInt3() + 50;
+        int iteration3 = Utils.getRandomInt3() + 50;
+//        int iteration1 = (random + 30);
+//        int iteration2 = (random + 35);
+//        int iteration3 = (random + 40);
+        //int[] iterations = {iteration1, iteration2, iteration3};
+
+        int numIt1;
+        int numIt2;
+        int numIt3;
+        int itemArray = Utils.getRandomInt3();
+        //numIt1 = iterations[itemArray];
+/*        if (itemArray == 0) {
+            numIt2 = iterations[1];
+            numIt3 = iterations[2];
+        } else if(itemArray == 1) {
+            numIt2 = iterations[2];
+            numIt3 = iterations[0];
+        } else {
+            numIt2 = iterations[0];
+            numIt3 = iterations[1];
+        }*/
+
+        // Start spinning
+        mSpinnerView1.startSpinning(0, iteration1);
+        mSpinnerView2.startSpinning(100, iteration2);
+        mSpinnerView3.startSpinning(150, iteration3);
+
 
         State.SlotIcon[] slotIcons = getSelectedCombination();
         slotService.insert(new State(slotIcons));
 
         if ((slotIcons[0].slotId == slotIcons[1].slotId) && (slotIcons[1].slotId == slotIcons[2].slotId)) {
-            Toast.makeText(this, "Claim!", Toast.LENGTH_LONG).show();
             new ClaimDialogFragment().show(getSupportFragmentManager(), "Prize");
         }
 

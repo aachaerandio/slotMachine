@@ -35,7 +35,7 @@ public class SlotService {
 
         values.put(DatabaseOpenHelper.COLUMN_ICON_A, data.getIconA().ordinal());
         values.put(DatabaseOpenHelper.COLUMN_ICON_B, data.getIconB().ordinal());
-        values.put(DatabaseOpenHelper.COLUMN_ICON_C, data.getIconB().ordinal());
+        values.put(DatabaseOpenHelper.COLUMN_ICON_C, data.getIconC().ordinal());
         values.put(DatabaseOpenHelper.COLUMN_DATE, DATETIME_FORMAT.format(new Date()));
         mDB.insert(DatabaseOpenHelper.TABLE_NAME, null, values);
     }

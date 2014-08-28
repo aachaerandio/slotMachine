@@ -3,6 +3,7 @@ package com.aachaerandio.slotmachine.views;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +20,11 @@ public class SpinnerView extends LinearLayout implements Runnable{
     ImageView selectedImage;
     ImageView lowerImage;
     State.SlotIcon selected;
+
+    public static final int SPEED = 50;
+    public int counter;
+
+    Handler mHandler = new Handler();
 
 //    View mView;
 
@@ -47,29 +53,26 @@ public class SpinnerView extends LinearLayout implements Runnable{
         upperImage.setAlpha(0.5f);
         lowerImage.setAlpha(0.5f);
 
-//        mView = View.inflate(this.getContext(), R.id.spinnerView, this);
-
-//        mView.findViewById(upperImage);
-
         this.addView(upperImage);
         this.addView(selectedImage);
         this.addView(lowerImage);
     }
 
-    public void startSpinning(){
+    public void startSpinning(int delay, int counter){
+        this.counter = counter;
+        mHandler.postDelayed(this, delay);
 
     }
 
     @Override
     public void run() {
-//        for (int i = 0; i < 50; i++) {
-            spin();
-//            try {
-//                Thread.sleep(500);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        // Call to spin once
+        spin();
+
+        if(--counter > 0) {
+            mHandler.postDelayed(this, 100-SPEED);
+        }
+
     }
 
     private void spin() {
