@@ -1,5 +1,6 @@
 package com.aachaerandio.slotmachine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
@@ -7,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import com.aachaerandio.slotmachine.data.SlotService;
@@ -37,7 +37,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button start = (Button)findViewById(R.id.start_button);
-        animation = AnimationUtils.loadAnimation(this, R.anim.scale);
+        Button history = (Button)findViewById(R.id.list_button);
+
+        //animation = AnimationUtils.loadAnimation(this, R.anim.scale);
         slotService = new SlotService(this);
 
         mSpinnerView1 = (SpinnerView) findViewById(R.id.spinnerView);
@@ -48,7 +50,6 @@ public class MainActivity extends ActionBarActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
 //                int randBuffer[] = new int [3];
 //                ImageView[] ivFruit = {
@@ -63,18 +64,17 @@ public class MainActivity extends ActionBarActivity {
 //                    ivFruit[i].startAnimation(animation);
 //                }
 
-                State.SlotIcon[] slotIcons = Utils.generateRandomResults();
-                slotService.insert(new State(slotIcons));
-
-
                 startGame();
 
-
-//                Intent intent = new Intent(MainActivity.this, ListStateActivity.class);
-//                startActivity(intent);
-
+            }
+        });
 
 
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ListStateActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -83,9 +83,23 @@ public class MainActivity extends ActionBarActivity {
         Handler handler = new Handler();
 
         handler.post(mSpinnerView1);
+        handler.postDelayed(mSpinnerView2, 500);
+        handler.postDelayed(mSpinnerView3, 1000);
+
+        State.SlotIcon[] slotIcons = getSelectedCombination();
+        slotService.insert(new State(slotIcons));
 
     }
 
+    public State.SlotIcon[] getSelectedCombination(){
+        State.SlotIcon[] result = new State.SlotIcon[3];
+
+        result[0] = mSpinnerView1.getSelected();
+        result[1] = mSpinnerView2.getSelected();
+        result[2] = mSpinnerView3.getSelected();
+
+        return result;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

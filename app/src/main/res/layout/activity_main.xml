@@ -9,7 +9,6 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
@@ -18,7 +17,8 @@
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape">
 
         <com.aachaerandio.slotmachine.views.SpinnerView
             android:layout_width="wrap_content"
@@ -42,21 +42,25 @@
 
     </LinearLayout>
 
-
     <Button
-        android:layout_width="120dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start"
         android:id="@+id/start_button"
         android:layout_gravity="center_horizontal"
-        android:background="#B266FF"/>
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/blue"/>
 
     <Button
-        android:layout_width="120dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Records"
+        android:text="@string/records"
         android:id="@+id/list_button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/blue"/>
 
 </LinearLayout>

@@ -4,9 +4,8 @@
     <string name="app_name">SlotMachine</string>
     <string name="message">Start spinning!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_list_state">ListState</string>
+    <string name="title_activity_list_state">History</string>
     <string name="start">START</string>
-    <string name="records">RECORDS</string>
-    <string name="Records">RECORDS</string>
+    <string name="records">HISTORY</string>
 
 </resources>
