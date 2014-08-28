@@ -2,6 +2,7 @@ package com.aachaerandio.slotmachine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import java.util.Random;
 
 public class MainActivity extends ActionBarActivity implements OnSpinnerEndListener{
 
+    public static final String WINNER_ICON = "WINNER_ICON";
     private int [] images = {
          R.drawable.slot_icon_01,
          R.drawable.slot_icon_02,
@@ -74,36 +76,15 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
         semaphore = 3;
 
         // Get ramdom number of iterations for every column
-        int iteration1 = Utils.getRandomInt3() + 50;
-        int iteration2 = Utils.getRandomInt3() + 50;
-        int iteration3 = Utils.getRandomInt3() + 50;
-//        int iteration1 = (random + 30);
-//        int iteration2 = (random + 35);
-//        int iteration3 = (random + 40);
-        //int[] iterations = {iteration1, iteration2, iteration3};
-
-        int numIt1;
-        int numIt2;
-        int numIt3;
-        int itemArray = Utils.getRandomInt3();
-        //numIt1 = iterations[itemArray];
-/*        if (itemArray == 0) {
-            numIt2 = iterations[1];
-            numIt3 = iterations[2];
-        } else if(itemArray == 1) {
-            numIt2 = iterations[2];
-            numIt3 = iterations[0];
-        } else {
-            numIt2 = iterations[0];
-            numIt3 = iterations[1];
-        }*/
+        Random random = new Random();
+        int iteration1 = random.nextInt(5) + 50;
+        int iteration2 = random.nextInt(5) + 50;
+        int iteration3 = random.nextInt(5) + 50;
 
         // Start spinning
         mSpinnerView1.startSpinning(0, iteration1);
         mSpinnerView2.startSpinning(100, iteration2);
         mSpinnerView3.startSpinning(150, iteration3);
-
-
     }
 
     public State.SlotIcon[] getSelectedCombination(){
@@ -138,11 +119,21 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
     @Override
     public void checkAndSave() {
         if (--semaphore <= 0) {
-            State.SlotIcon[] slotIcons = getSelectedCombination();
+            final State.SlotIcon[] slotIcons = getSelectedCombination();
             slotService.insert(new State(slotIcons));
 
             if ((slotIcons[0].slotId == slotIcons[1].slotId) && (slotIcons[1].slotId == slotIcons[2].slotId)) {
-                new ClaimDialogFragment().show(getSupportFragmentManager(), "Prize");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(WINNER_ICON, slotIcons[0].ordinal());
+                        ClaimDialogFragment dialog = new ClaimDialogFragment();
+                        dialog.setArguments(bundle);
+                        dialog.show(getSupportFragmentManager(), "Prize");
+                    }
+                }, 250);
+
             }
         }
     }

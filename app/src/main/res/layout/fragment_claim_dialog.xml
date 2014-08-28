@@ -1,25 +1,44 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.aachaerandio.slotmachine.ClaimDialogFragment"
-    android:background="@drawable/border">
+    android:layout_height="wrap_content"
+    tools:context="com.aachaerandio.slotmachine.ClaimDialogFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="bottom">
+        android:layout_gravity="center_vertical"
+        android:background="@android:color/white"
+        android:layout_margin="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FREE"
-            android:textSize="40sp"
-            android:textColor="@color/pink"
-            android:id="@+id/textView"
-            android:layout_margin="30dp"
-            android:layout_gravity="center_horizontal" />
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FREE"
+                    android:textSize="35sp"
+                    android:textColor="@color/pink"
+                    android:id="@+id/textView"
+                    android:layout_margin="20dp"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="35sp"
+                    android:id="@+id/winner_text"
+                    android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
 
         <ImageView
             android:layout_width="wrap_content"
@@ -27,8 +46,7 @@
             android:scaleType="center"
             android:layout_gravity="center_horizontal"
             android:id="@+id/dialog_image"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/slot_icon_01"/>
+            android:layout_marginTop="50dp"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -36,7 +54,7 @@
             android:scaleType="center"
             android:background="@color/blue"
             android:contentDescription="@string/app_name"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="100dp"
             android:layout_gravity="bottom" />
 
     </LinearLayout>

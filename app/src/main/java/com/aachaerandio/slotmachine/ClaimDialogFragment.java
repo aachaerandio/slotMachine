@@ -5,6 +5,11 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.aachaerandio.slotmachine.data.State;
 
 public class ClaimDialogFragment extends DialogFragment {
 
@@ -16,7 +21,14 @@ public class ClaimDialogFragment extends DialogFragment {
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.fragment_claim_dialog, null));
+        View view = inflater.inflate(R.layout.fragment_claim_dialog, null);
+
+        ImageView image = (ImageView)view.findViewById(R.id.dialog_image);
+        TextView winnerText = (TextView)view.findViewById(R.id.winner_text);
+        State.SlotIcon slotIcon = State.SlotIcon.values()[getArguments().getInt(MainActivity.WINNER_ICON)];
+        image.setImageResource(slotIcon.slotId);
+        winnerText.setText(slotIcon.toString());
+        builder.setView(view);
         // Add action buttons
  /*               .setPositiveButton(R.string.signin, new DialogInterface.OnClickListener() {
                     @Override
