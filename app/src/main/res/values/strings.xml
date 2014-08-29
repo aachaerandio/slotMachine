@@ -9,5 +9,7 @@
     <string name="records">HISTORY</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button_text">CLAIM!</string>
+    <string name="button_loose">TRY AGAIN!</string>
+    <string name="sorry_text">Sorry you didn’t win</string>
 
 </resources>

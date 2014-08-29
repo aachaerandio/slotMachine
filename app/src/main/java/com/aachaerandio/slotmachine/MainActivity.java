@@ -20,6 +20,7 @@ import java.util.Random;
 public class MainActivity extends ActionBarActivity implements OnSpinnerEndListener{
 
     public static final String WINNER_ICON = "WINNER_ICON";
+    public static final String LOOSE = "LOOSE";
     private int [] images = {
          R.drawable.slot_icon_01,
          R.drawable.slot_icon_02,
@@ -142,6 +143,18 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
                     }
                 }, 250);
 
+            }
+            else {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean(LOOSE, true);
+                        ClaimDialogFragment dialog = new ClaimDialogFragment();
+                        dialog.setArguments(bundle);
+                        dialog.show(getSupportFragmentManager(), "Prize");
+                    }
+                }, 250);
             }
         }
     }

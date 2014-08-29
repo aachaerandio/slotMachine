@@ -1,0 +1,60 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.aachaerandio.slotmachine.ClaimDialogFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:background="@android:color/white"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sorry_text"
+                android:textSize="25sp"
+                android:id="@+id/winner_text"
+                android:layout_margin="20dp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/dialog_image"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/icon_sad"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/button_loose"
+            android:layout_height="64dp"
+            android:scaleType="center"
+            android:background="@color/blue"
+            android:contentDescription="@string/app_name"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="bottom"
+            android:text="@string/button_loose"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>

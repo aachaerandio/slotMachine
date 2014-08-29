@@ -53,8 +53,8 @@ public class SpinnerView extends LinearLayout implements Runnable{
         selectedImage.setImageResource(selected.slotId);
         lowerImage.setImageResource(selected.getNext().slotId);
 
-        upperImage.setAlpha(0.5f);
-        lowerImage.setAlpha(0.5f);
+        upperImage.setAlpha(0.3f);
+        lowerImage.setAlpha(0.3f);
 
         this.addView(upperImage);
         this.addView(selectedImage);
