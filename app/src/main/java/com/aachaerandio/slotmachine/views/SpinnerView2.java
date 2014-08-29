@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.aachaerandio.slotmachine.Listeners.OnSpinnerEndListener;
-import com.aachaerandio.slotmachine.Utils;
 import com.aachaerandio.slotmachine.data.State;
 
 /**
@@ -43,28 +42,15 @@ public class SpinnerView2 extends ListView implements Runnable{
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void init() {
-        setOrientation(VERTICAL);
-        upperImage = new ImageView(getContext());
-        selectedImage = new ImageView(getContext());
-        lowerImage = new ImageView(getContext());
 
-        selected = State.SlotIcon.values()[Utils.getRandomInt3()];
-        upperImage.setImageResource(selected.getPrevious().slotId);
-        selectedImage.setImageResource(selected.glowId);
-        lowerImage.setImageResource(selected.getNext().slotId);
-
-        upperImage.setAlpha(0.3f);
-        lowerImage.setAlpha(0.3f);
-
-        this.addView(upperImage);
-        this.addView(selectedImage);
-        this.addView(lowerImage);
     }
 
     public void startSpinning(int delay, int counter){
         this.counter = counter;
         speed = 80;
-        mHandler.postDelayed(this, delay);
+        //mHandler.postDelayed(this, delay);
+        this.smoothScrollToPosition(counter);
+        //this.smoothScrollBy
 
     }
 

@@ -6,14 +6,19 @@ import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 
 import com.aachaerandio.slotmachine.Listeners.OnSpinnerEndListener;
+import com.aachaerandio.slotmachine.adapter.SpinnerViewAdapter;
 import com.aachaerandio.slotmachine.data.SlotService;
 import com.aachaerandio.slotmachine.data.State;
-import com.aachaerandio.slotmachine.views.SpinnerView;
+import com.aachaerandio.slotmachine.views.SpinnerView2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -29,10 +34,14 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
 
     Random random = new Random();
     SlotService slotService;
-    protected SpinnerView mSpinnerView1;
-    protected SpinnerView mSpinnerView2;
-    protected SpinnerView mSpinnerView3;
+    protected SpinnerView2 mSpinnerView1;
+    protected SpinnerView2 mSpinnerView2;
+    protected SpinnerView2 mSpinnerView3;
     public int semaphore;
+
+    public SpinnerViewAdapter mAdapter1;
+    public SpinnerViewAdapter mAdapter2;
+    public SpinnerViewAdapter mAdapter3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +52,45 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
 
         slotService = new SlotService(this);
 
-        mSpinnerView1 = (SpinnerView) findViewById(R.id.spinnerView);
-        mSpinnerView2 = (SpinnerView) findViewById(R.id.spinnerView2);
-        mSpinnerView3 = (SpinnerView) findViewById(R.id.spinnerView3);
+        mAdapter1 = new SpinnerViewAdapter(this, R.layout.spin_list_item, initList());
+        mAdapter2 = new SpinnerViewAdapter(this, R.layout.spin_list_item, initList());
+        mAdapter3 = new SpinnerViewAdapter(this, R.layout.spin_list_item, initList());
+
+        mSpinnerView1 = (SpinnerView2) findViewById(R.id.spinnerView);
+        mSpinnerView2 = (SpinnerView2) findViewById(R.id.spinnerView2);
+        mSpinnerView3 = (SpinnerView2) findViewById(R.id.spinnerView3);
+
+        mSpinnerView1.setAdapter(mAdapter1);
+        mSpinnerView2.setAdapter(mAdapter2);
+        mSpinnerView3.setAdapter(mAdapter3);
+
+        mSpinnerView1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                    return true;
+                    }
+                return false;
+            }
+        });
+        mSpinnerView2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                    return true;
+                }
+                return false;
+            }
+        });
+        mSpinnerView3.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                    return true;
+                }
+                return false;
+            }
+        });
 
         mSpinnerView1.setListener(this);
         mSpinnerView2.setListener(this);
@@ -67,6 +112,20 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
                 startActivity(intent);
             }
         });
+
+        final View mHorizontalView = findViewById(R.id.horizontalView);
+
+        mHorizontalView.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                    @Override
+                    public void onGlobalLayout() {
+                        // make sure it is not called anymore
+                        mHorizontalView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+
+                       int heigth = mHorizontalView.getMeasuredHeight();
+                    }
+                });
     }
 
     /**
@@ -78,14 +137,29 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
 
         // Get ramdom number of iterations for every column
         Random random = new Random();
-        int iteration1 = random.nextInt(5) + 60;
-        int iteration2 = random.nextInt(5) + 60;
-        int iteration3 = random.nextInt(5) + 60;
+        int iteration1 = random.nextInt(5) + 160;
+        int iteration2 = random.nextInt(5) + 160;
+        int iteration3 = random.nextInt(5) + 160;
 
         // Start spinning
         mSpinnerView1.startSpinning(0, iteration1);
         mSpinnerView2.startSpinning(100, iteration2);
         mSpinnerView3.startSpinning(150, iteration3);
+    }
+
+    private List<State.SlotIcon> initList() {
+
+        List<State.SlotIcon> list = new ArrayList<State.SlotIcon>();
+        int random = Utils.getRandomInt3();
+        State.SlotIcon slotIcon = State.SlotIcon.values()[random];
+        list.add(slotIcon);
+
+        for (int i=0; i<250; i++) {
+            slotIcon = slotIcon.getNext();
+            list.add(slotIcon);
+        }
+
+        return list;
     }
 
     /**
