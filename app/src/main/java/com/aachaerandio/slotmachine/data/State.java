@@ -10,9 +10,9 @@ import java.util.Date;
  */
 public class State {
     public enum SlotIcon {
-        CHERRY(R.drawable.slot_icon_01, R.drawable.list_icon_01, R.drawable.prize_icon_01), //0
-        LEMON(R.drawable.slot_icon_02, R.drawable.list_icon_02, R.drawable.prize_icon_02), //1
-        PEAR(R.drawable.slot_icon_03, R.drawable.list_icon_03, R.drawable.prize_icon_03); //2
+        CHERRY(R.drawable.slot_icon_01, R.drawable.list_icon_01, R.drawable.prize_icon_01, R.drawable.slot_icon_glow_01), //0
+        LEMON(R.drawable.slot_icon_02, R.drawable.list_icon_02, R.drawable.prize_icon_02, R.drawable.slot_icon_glow_02), //1
+        PEAR(R.drawable.slot_icon_03, R.drawable.list_icon_03, R.drawable.prize_icon_03, R.drawable.slot_icon_glow_03); //2
 
         public int slotId;
 
@@ -20,10 +20,13 @@ public class State {
 
         public int prizeId;
 
-        private SlotIcon(int slotId, int listId, int prizeId) {
+        public int glowId;
+
+        private SlotIcon(int slotId, int listId, int prizeId, int glowId) {
             this.slotId = slotId;
             this.listId = listId;
             this.prizeId = prizeId;
+            this.glowId = glowId;
         }
 
         public SlotIcon getNext() {

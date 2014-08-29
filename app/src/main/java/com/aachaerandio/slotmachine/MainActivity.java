@@ -78,9 +78,9 @@ public class MainActivity extends ActionBarActivity implements OnSpinnerEndListe
 
         // Get ramdom number of iterations for every column
         Random random = new Random();
-        int iteration1 = random.nextInt(5) + 50;
-        int iteration2 = random.nextInt(5) + 50;
-        int iteration3 = random.nextInt(5) + 50;
+        int iteration1 = random.nextInt(5) + 60;
+        int iteration2 = random.nextInt(5) + 60;
+        int iteration3 = random.nextInt(5) + 60;
 
         // Start spinning
         mSpinnerView1.startSpinning(0, iteration1);

@@ -50,7 +50,7 @@ public class SpinnerView extends LinearLayout implements Runnable{
 
         selected = State.SlotIcon.values()[Utils.getRandomInt3()];
         upperImage.setImageResource(selected.getPrevious().slotId);
-        selectedImage.setImageResource(selected.slotId);
+        selectedImage.setImageResource(selected.glowId);
         lowerImage.setImageResource(selected.getNext().slotId);
 
         upperImage.setAlpha(0.3f);
@@ -63,7 +63,7 @@ public class SpinnerView extends LinearLayout implements Runnable{
 
     public void startSpinning(int delay, int counter){
         this.counter = counter;
-        speed = 50;
+        speed = 80;
         mHandler.postDelayed(this, delay);
 
     }
@@ -74,10 +74,13 @@ public class SpinnerView extends LinearLayout implements Runnable{
         spin();
 
         if(--counter > 0) {
-            if(counter < 20) {
+            if(counter < 15) {
+                speed -=4;
+            }
+            if(counter < 25) {
                 speed -=2;
             }
-            mHandler.postDelayed(this, 100-speed);
+            mHandler.postDelayed(this, 140-speed);
         }
         else if(listener != null){
             listener.checkAndSave();
@@ -92,7 +95,7 @@ public class SpinnerView extends LinearLayout implements Runnable{
         selected = selected.getPrevious();
 
         upperImage.setImageResource(selected.getPrevious().slotId);
-        selectedImage.setImageResource(selected.slotId);
+        selectedImage.setImageResource(selected.glowId);
         lowerImage.setImageResource(selected.getNext().slotId);
 
         upperImage.invalidate();
