@@ -25,27 +25,27 @@
             android:background="@drawable/shape"
             android:layout_centerHorizontal="true">
 
-            <com.aachaerandio.slotmachine.views.SpinnerView
+            <com.aachaerandio.slotmachine.views.SpinnerView2
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerView"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp">
-            </com.aachaerandio.slotmachine.views.SpinnerView>
+            </com.aachaerandio.slotmachine.views.SpinnerView2>
 
-            <com.aachaerandio.slotmachine.views.SpinnerView
+            <com.aachaerandio.slotmachine.views.SpinnerView2
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerView2"
                 android:layout_marginRight="10dp">
-            </com.aachaerandio.slotmachine.views.SpinnerView>
+            </com.aachaerandio.slotmachine.views.SpinnerView2>
 
-            <com.aachaerandio.slotmachine.views.SpinnerView
+            <com.aachaerandio.slotmachine.views.SpinnerView2
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerView3"
                 android:layout_marginRight="10dp">
-            </com.aachaerandio.slotmachine.views.SpinnerView>
+            </com.aachaerandio.slotmachine.views.SpinnerView2>
         </LinearLayout>
 
         <ImageView
